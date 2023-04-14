@@ -13,7 +13,7 @@ pygame.init()
 
 window = pygame.display.set_mode((winWidth, winHeight))
 pygame.display.set_caption("INFINITE RUNNER")
-bg = pygame.image.load("Sky12.jpg")
+bg = pygame.image.load("bg.jpg")
 bg = pygame.transform.scale(bg, (700, 500))
 
 # variables for commonly used colours
