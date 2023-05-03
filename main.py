@@ -233,12 +233,10 @@ def game():
         global obstacles_speed
         global active 
         global rectSpeed
-        # global OB_Y
-        # global OB_X
 
         user = window.blit(current_alien, (rectX, rectY))
         player()
-        #pygame.draw.rect(window, MAGENTA, (rectX, rectY, rectSize, rectSize))
+        
         score_text = font.render(f'{score}', True, white)
         coin_text = font.render(f'{math.floor(coin_count/1200)}', True, white)
         title_font = pygame.font.Font('freesansbold.ttf', 32)
@@ -250,21 +248,6 @@ def game():
         window.blit(score_text, (340, 15))
         window.blit(coin, (0,0))
         window.blit(coin_text, (40,5))
-
-        # window.blit(OB1, (OB_X[0],OB_Y[0]))
-        # window.blit(OB1, (OB_X[1],OB_Y[1]))
-        # window.blit(OB1, (OB_X[2],OB_Y[2]))
-        # window.blit(OB1, (OB_X[3],OB_Y[3]))
-        # window.blit(OB1, (OB_X[4],OB_Y[4]))
-        # window.blit(OB1, (OB_X[5],OB_Y[5]))
-   
-
-        # obstacle0 = (OB1, (OBSTACLE.x,OBSTACLE.y))
-        # obstacle1 = (OB1, (OBSTACLE.x,OBSTACLE.y))
-        # obstacle2 = (OB1, (OBSTACLE.x,OBSTACLE.y))
-        # obstacle3 = (OB1, (OBSTACLE.x,OBSTACLE.y))
-        # obstacle4 = (OB1, (OBSTACLE.x,OBSTACLE.y))
-        # obstacle5 = (OB1, (OBSTACLE.x,OBSTACLE.y))
 
         obstacle0 = pygame.draw.rect(window, red, (obstaclesX[0], obstaclesY[0], 45, 15))
         obstacle1 = pygame.draw.rect(window, orange, (obstaclesX[1], obstaclesY[1], 75, 20))
@@ -406,15 +389,6 @@ def game():
                 if obstaclesY[i] == obstaclesY[5]:
                     obstaclesY[i] = obstaclesY[2]-random.randint(150, 300)
                 obstaclesX[i] = rand[i]
-
-                # OB_Y[i] = random.randint(-200, -75)
-                # if OB_Y[i] == OB_Y[3]:
-                #     OB_Y[i] = OB_Y[1]-random.randint(200, 350)
-                # if OB_Y[i] == OB_Y[4]:
-                #     OB_Y[i] = OB_Y[2]-random.randint(200, 350)
-                # if OB_Y[i] == OB_Y[5]:
-                #     OB_Y[i] = OB_Y[2]-random.randint(200, 350)
-                # OB_X[i] = rand[i]
             
             if coin1.colliderect(user) and coin1.y < 500:
                 pygame.draw.rect(window, sky, (coin1.x, coin1.y, 30, 30))
