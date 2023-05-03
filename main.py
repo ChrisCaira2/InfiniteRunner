@@ -2,6 +2,7 @@ import random
 import pygame, sys
 import math
 import pygame.event as EVENTS
+from pygame import mixer
 
 winWidth = 700
 winHeight = 500
@@ -14,8 +15,6 @@ pygame.display.set_caption("INFINITE RUNNER")
 bg = pygame.image.load("bg.jpg")
 bg = pygame.transform.scale(bg, (700, 500))
 
-# cloud = pygame.image.load('cloud.png')
-# coin = pygame.transform.scale(cloud, (50, 50))
 
 #
 # COINS
@@ -38,11 +37,30 @@ grey = (100, 100, 100)
 green = (0,128,0)
 sky = (0,191,255)
 
-# OB1 = pygame.image.load('OB1.png')
-# OBSTACLE = OB1.get_rect()
-# OB_X = [random.randint(0, 200), random.randint(200, 400), random.randint(500, 700), 
-#                 random.randint(100, 350), random.randint(400, 500), random.randint(550, 650)]
-# OB_Y = [0,0,0, -400, -400, -400]
+OB1 = pygame.image.load('OB1.png')
+OB2 = pygame.image.load('OB2.png')
+OB3 = pygame.image.load('OB3.png')
+## RED SPIKES
+R_spike1 = OB1.get_rect()
+R_spike2 = OB1.get_rect()
+R_spike3 = OB1.get_rect()
+R_spike4 = OB1.get_rect()
+R_spike5 = OB1.get_rect()
+R_spike6 = OB1.get_rect()
+R_spike7 = OB1.get_rect()
+
+## ORANGE SPIKES 
+O_spike1 = OB2.get_rect()
+O_spike2 = OB2.get_rect()
+O_spike3 = OB2.get_rect()
+O_spike4 = OB2.get_rect()
+O_spike5 = OB2.get_rect()
+
+## YELLOW SPIKES
+Y_spike1 = OB3.get_rect()
+Y_spike2 = OB3.get_rect()
+Y_spike3 = OB3.get_rect()
+Y_spike4 = OB3.get_rect()
 
 obstaclesX = [random.randint(0, 200), random.randint(200, 400), random.randint(500, 620), 
                 random.randint(100, 350), random.randint(400, 500), random.randint(550, 650)]
@@ -194,6 +212,8 @@ def startScreen():
         window.blit(choose_avatar, (205, 320))
         if event.type == pygame.KEYUP and avatar_screen == False:
             if event.key == pygame.K_SPACE:
+                pygame.mixer.music.load('bg.wav')
+                pygame.mixer.music.play()
                 avatar_screen = False
                 active = True
             
@@ -246,7 +266,7 @@ def game():
         # obstacle4 = (OB1, (OBSTACLE.x,OBSTACLE.y))
         # obstacle5 = (OB1, (OBSTACLE.x,OBSTACLE.y))
 
-        obstacle0 = pygame.draw.rect(window, red, (obstaclesX[0], obstaclesY[0], 45, 20))
+        obstacle0 = pygame.draw.rect(window, red, (obstaclesX[0], obstaclesY[0], 45, 15))
         obstacle1 = pygame.draw.rect(window, orange, (obstaclesX[1], obstaclesY[1], 75, 20))
         obstacle2 = pygame.draw.rect(window, yellow, (obstaclesX[2], obstaclesY[2], 90, 20))
         obstacle3 = pygame.draw.rect(window, red, (obstaclesX[3], obstaclesY[3], 90, 20))
@@ -262,27 +282,117 @@ def game():
             coin2.x = obstaclesX[3] - 85
             coin2.y = obstaclesY[3] - 50
 
+            ## SPIKES ON obstacle0 [RED]
+            R_spike1.x = obstaclesX[0]
+            R_spike1.y = obstaclesY[0] + 12
+            R_spike2.x = obstaclesX[0] + 23
+            R_spike2.y = obstaclesY[0] + 12
+            
+            ## SPIKES ON obstacle1 [ORANGE]
+            O_spike1.x = obstaclesX[1]
+            O_spike1.y = obstaclesY[1] + 17
+            O_spike2.x = obstaclesX[1] + 25
+            O_spike2.y = obstaclesY[1] + 17
+            O_spike3.x = obstaclesX[1] + 50
+            O_spike3.y = obstaclesY[1] + 17
+
+            ## SPIKES ON obstacle2 [YELLOW]
+            Y_spike1.x = obstaclesX[2]
+            Y_spike1.y = obstaclesY[2] + 17
+            Y_spike2.x = obstaclesX[2] + 22
+            Y_spike2.y = obstaclesY[2] + 17
+            Y_spike3.x = obstaclesX[2] + 47
+            Y_spike3.y = obstaclesY[2] + 17
+            Y_spike4.x = obstaclesX[2] + 68
+            Y_spike4.y = obstaclesY[2] + 17
+
+            ## SPIKES ON obstacle3 [RED]
+            R_spike3.x = obstaclesX[3]
+            R_spike3.y = obstaclesY[3] + 20
+            R_spike4.x = obstaclesX[3] + 33
+            R_spike4.y = obstaclesY[3] + 20
+            R_spike5.x = obstaclesX[3] + 67
+            R_spike5.y = obstaclesY[3] + 20
+
+            ## SPIKES ON obstacle4 [ORANGE]
+            O_spike4.x = obstaclesX[4] + 2
+            O_spike4.y = obstaclesY[4] + 20
+
+            ## SPIKES ON obstacle5 [RED]
+            R_spike6.x = obstaclesX[5]
+            R_spike6.y = obstaclesY[5] + 20
+            R_spike7.x = obstaclesX[5] + 18
+            R_spike7.y = obstaclesY[5] + 20
+
             window.blit(coin, coin1)
             window.blit(coin, coin2)
 
-            obstaclesY[i] += obstacles_speed
-            # OB_Y[i] += obstacles_speed
+            # DISPLAY RED SPIKES
+            window.blit(OB1, R_spike1)
+            window.blit(OB1, R_spike2)
+            window.blit(OB1, R_spike3)
+            window.blit(OB1, R_spike4)
+            window.blit(OB1, R_spike5)
+            window.blit(OB1, R_spike6)
+            window.blit(OB1, R_spike7)
 
+            # DISPLAY ORANGE SPIKES
+            window.blit(OB2, O_spike1)
+            window.blit(OB2, O_spike2)
+            window.blit(OB2, O_spike3)
+            window.blit(OB2, O_spike4)
+
+            # DISPLAY YELLOW SPIKES
+            window.blit(OB3, Y_spike1)
+            window.blit(OB3, Y_spike2)
+            window.blit(OB3, Y_spike3)
+            window.blit(OB3, Y_spike4)
+
+
+            obstaclesY[i] += obstacles_speed
+
+            # COIN MOVEMENT
             coin1.y += obstacles_speed
             coin2.y += obstacles_speed
 
+            # RED SPIKE MOVEMENT
+            R_spike1.y += obstacles_speed
+            R_spike2.y += obstacles_speed
+            R_spike3.y += obstacles_speed
+            R_spike4.y += obstacles_speed
+            R_spike5.y += obstacles_speed
+            R_spike6.y += obstacles_speed
+            R_spike7.y += obstacles_speed
+
+            # ORANGE SPIKE MOVEMENT
+            O_spike1.y += obstacles_speed
+            O_spike2.y += obstacles_speed
+            O_spike3.y += obstacles_speed
+            O_spike4.y += obstacles_speed
+
+            # YELLOW SPIKE MOVEMENT
+            Y_spike1.y += obstacles_speed
+            Y_spike2.y += obstacles_speed
+            Y_spike3.y += obstacles_speed
+            Y_spike4.y += obstacles_speed
+
+            # OBSTACLES SPEED INCREASE
             if obstaclesY[i] > 500:
                 score += 1
-                if score > 200:
-                    obstacles_speed = .50
+                if score > 400:
+                    obstacles_speed = .65
+                elif score > 300:
+                    obstacles_speed = .60
+                elif score > 200:
+                    obstacles_speed = .55
                 elif score > 150:
-                    obstacles_speed = .45
+                    obstacles_speed = .50
                 elif score > 100:
-                    obstacles_speed = .40
+                    obstacles_speed = .45
                 elif score > 60:
-                    obstacles_speed = .35
+                    obstacles_speed = .40
                 elif score > 30:
-                    obstacles_speed = .30
+                    obstacles_speed = .35
                 else:
                     obstacles_speed = obstacles_speed
 
@@ -290,11 +400,11 @@ def game():
                 
                 obstaclesY[i] = random.randint(-200, -75)
                 if obstaclesY[i] == obstaclesY[3]:
-                    obstaclesY[i] = obstaclesY[1]-random.randint(200, 350)
+                    obstaclesY[i] = obstaclesY[1]-random.randint(150, 300)
                 if obstaclesY[i] == obstaclesY[4]:
-                    obstaclesY[i] = obstaclesY[2]-random.randint(200, 350)
+                    obstaclesY[i] = obstaclesY[2]-random.randint(150, 300)
                 if obstaclesY[i] == obstaclesY[5]:
-                    obstaclesY[i] = obstaclesY[2]-random.randint(200, 350)
+                    obstaclesY[i] = obstaclesY[2]-random.randint(150, 300)
                 obstaclesX[i] = rand[i]
 
                 # OB_Y[i] = random.randint(-200, -75)
@@ -314,7 +424,7 @@ def game():
                 pygame.draw.rect(window, sky, (coin2.x, coin2.y, 30, 30))
                 coin_count += 1
 
-            if user.colliderect(obstacle0) or user.colliderect(obstacle1) or user.colliderect(obstacle2) or user.colliderect(obstacle3) or user.colliderect(obstacle4) or user.colliderect(obstacle5):
+            if  R_spike1.colliderect(user) or R_spike2.colliderect(user) or R_spike3.colliderect(user)or R_spike4.colliderect(user)or R_spike5.colliderect(user)or R_spike6.colliderect(user)or R_spike7.colliderect(user)or O_spike1.colliderect(user)or O_spike2.colliderect(user)or O_spike3.colliderect(user)or O_spike4.colliderect(user)or Y_spike1.colliderect(user)or Y_spike2.colliderect(user)or Y_spike3.colliderect(user)or Y_spike4.colliderect(user)or user.colliderect(obstacle0) or user.colliderect(obstacle1) or user.colliderect(obstacle2) or user.colliderect(obstacle3) or user.colliderect(obstacle4) or user.colliderect(obstacle5):
                 obstacles_speed = 0 
                 rectSpeed = 0
 
@@ -327,6 +437,7 @@ def game():
 
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_m:
+                        pygame.mixer.music.pause()
                         active = False
                         rectSpeed = .40
                         obstacles_speed = .30
@@ -374,3 +485,4 @@ while ingame:
         
     # update the display window...
     pygame.display.update()
+
